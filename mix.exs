@@ -26,7 +26,7 @@ defmodule Pluggy.MixProject do
       {:neotoma, "~> 1.7.3", manager: :rebar3, override: true},
       {:plug_cowboy, "~> 2.5.2"},
       {:postgrex, "~> 0.16.4"},
-      {:bcrypt_elixir, "~> 3.0.1"},
+      {:bcrypt_elixir, "~> 3.0.1"}
     ]
   end
 end
