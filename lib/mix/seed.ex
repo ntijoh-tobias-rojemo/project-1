@@ -60,194 +60,119 @@ defmodule Mix.Tasks.Seed do
   defp seed_data() do
     IO.puts("Seeding data")
 
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Skinka", 999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Oliver", 1999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Tomatsås", 499],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(
-      DB,
-      "INSERT INTO ingredients(name, price) VALUES($1, $2)",
-      ["Mozzarella", 499],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Basilika", 499],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Svamp", 1499],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(
-      DB,
-      "INSERT INTO ingredients(name, price) VALUES($1, $2)",
-      ["Kronärtskocka", 999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Parmesan", 2999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Pecorino", 999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(
-      DB,
-      "INSERT INTO ingredients(name, price) VALUES($1, $2)",
-      ["Gorgonzola", 1499],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Paprika", 999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Aubergine", 999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Zucchini", 999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Salami", 1999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Chili", 999],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(
-      DB,
-      "INSERT INTO ingredients(name, price) VALUES($1, $2)",
-      ["Familjepizza", 0],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Glutenfri", 0],
-      pool: DBConnection.ConnectionPool
-    )
+    insert_ingredient("Skinka", 999)
+    insert_ingredient("Oliver", 1999)
+    insert_ingredient("Tomatsås", 499)
+    insert_ingredient("Mozzarella", 499)
+    insert_ingredient("Basilika", 499)
+    insert_ingredient("Svamp", 1499)
+    insert_ingredient("Kronärtskocka", 999)
+    insert_ingredient("Parmesan", 2999)
+    insert_ingredient("Pecorino", 999)
+    insert_ingredient("Gorgonzola", 1499)
+    insert_ingredient("Paprika", 999)
+    insert_ingredient("Aubergine", 999)
+    insert_ingredient("Zucchini", 999)
+    insert_ingredient("Salami", 1999)
+    insert_ingredient("Chili", 999)
+    insert_ingredient("Familjepizza", 0)
+    insert_ingredient("Glutenfri", 0)
 
     ingredient_ids = get_ingredient_ids()
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
-      [
-        parse_to_bitfield(ingredient_ids, ["Tomatsås", "Mozzarella", "Basilika"]),
-        "Margherita",
-        10999
-      ],
-      pool: DBConnection.ConnectionPool
+    insert_pizza(
+      ingredient_ids,
+      ["Tomatsås", "Mozzarella", "Basilika"],
+      "Margherita",
+      10999
     )
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
-      [parse_to_bitfield(ingredient_ids, ["Tomatsås"]), "Marinara", 10999],
-      pool: DBConnection.ConnectionPool
+    insert_pizza(
+      ingredient_ids,
+      ["Tomatsås"],
+      "Marinara",
+      10999
     )
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
-      [
-        parse_to_bitfield(ingredient_ids, ["Tomatsås", "Mozzarella", "Skinka", "Svamp"]),
-        "Prosciutto e funghi",
-        12999
-      ],
-      pool: DBConnection.ConnectionPool
+    insert_pizza(
+      ingredient_ids,
+      ["Tomatsås", "Mozzarella", "Skinka", "Svamp"],
+      "Prosciutto e funghi",
+      12999
     )
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
+    insert_pizza(
+      ingredient_ids,
       [
-        parse_to_bitfield(ingredient_ids, [
-          "Tomatsås",
-          "Mozzarella",
-          "Skinka",
-          "Svamp",
-          "Kronärtskocka",
-          "Oliver"
-        ]),
-        "Quattro stagioni",
-        13999
+        "Tomatsås",
+        "Mozzarella",
+        "Skinka",
+        "Svamp",
+        "Kronärtskocka",
+        "Oliver"
       ],
-      pool: DBConnection.ConnectionPool
+      "Quattro stagioni",
+      13999
     )
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
+    insert_pizza(
+      ingredient_ids,
       [
-        parse_to_bitfield(ingredient_ids, [
-          "Tomatsås",
-          "Mozzarella",
-          "Skinka",
-          "Svamp",
-          "Kronärtskocka"
-        ]),
-        "Capricciosa",
-        12999
+        "Tomatsås",
+        "Mozzarella",
+        "Skinka",
+        "Svamp",
+        "Kronärtskocka"
       ],
-      pool: DBConnection.ConnectionPool
+      "Capricciosa",
+      12999
     )
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
+    insert_pizza(
+      ingredient_ids,
       [
-        parse_to_bitfield(ingredient_ids, [
-          "Tomatsås",
-          "Mozzarella",
-          "Parmesan",
-          "Pecorino",
-          "Gorgonzola"
-        ]),
-        "Quattro formaggi",
-        15999
+        "Tomatsås",
+        "Mozzarella",
+        "Parmesan",
+        "Pecorino",
+        "Gorgonzola"
       ],
-      pool: DBConnection.ConnectionPool
+      "Quattro formaggi",
+      15999
     )
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
+    insert_pizza(
+      ingredient_ids,
       [
-        parse_to_bitfield(ingredient_ids, [
-          "Tomatsås",
-          "Mozzarella",
-          "Paprika",
-          "Aubergine",
-          "Zucchini"
-        ]),
-        "Ortolana",
-        11999
+        "Tomatsås",
+        "Mozzarella",
+        "Paprika",
+        "Aubergine",
+        "Zucchini"
       ],
-      pool: DBConnection.ConnectionPool
+      "Ortolana",
+      11999
     )
 
+    insert_pizza(
+      ingredient_ids,
+      ["Tomatsås", "Mozzarella", "Salami", "Paprika", "Chili"],
+      "Diavola",
+      14999
+    )
+  end
+
+  defp insert_ingredient(name, price) do
+    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", [name, price],
+      pool: DBConnection.ConnectionPool
+    )
+  end
+
+  defp insert_pizza(ingredient_ids, ingredients, name, price) do
     Postgrex.query!(
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
-      [
-        parse_to_bitfield(ingredient_ids, ["Tomatsås", "Mozzarella", "Salami", "Paprika", "Chili"]),
-        "Diavola",
-        14999
-      ],
+      [parse_to_bitfield(ingredient_ids, ingredients), name, price],
       pool: DBConnection.ConnectionPool
     )
   end
