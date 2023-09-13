@@ -60,17 +60,6 @@ defmodule Mix.Tasks.Seed do
   defp seed_data() do
     IO.puts("Seeding data")
 
-    Postgrex.query!(
-      DB,
-      "INSERT INTO ingredients(name, price) VALUES($1, $2)",
-      ["Familjepizza", 0],
-      pool: DBConnection.ConnectionPool
-    )
-
-    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Glutenfri", 0],
-      pool: DBConnection.ConnectionPool
-    )
-
     Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Skinka", 999],
       pool: DBConnection.ConnectionPool
     )
@@ -137,6 +126,17 @@ defmodule Mix.Tasks.Seed do
     )
 
     Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Chili", 999],
+      pool: DBConnection.ConnectionPool
+    )
+
+    Postgrex.query!(
+      DB,
+      "INSERT INTO ingredients(name, price) VALUES($1, $2)",
+      ["Familjepizza", 0],
+      pool: DBConnection.ConnectionPool
+    )
+
+    Postgrex.query!(DB, "INSERT INTO ingredients(name, price) VALUES($1, $2)", ["Glutenfri", 0],
       pool: DBConnection.ConnectionPool
     )
 
