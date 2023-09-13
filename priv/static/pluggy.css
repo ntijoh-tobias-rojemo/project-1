@@ -1,16 +1,28 @@
-main {
+main.index {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 25% 25% 25% 25%;
 }
 
+main.cart {
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 main > div {
   grid-area: 1 1;
   display: grid;
+}
+
+main.index > div {
   grid-template-areas: "img name price" "img ingredients ingredients" "img customize buy";
 }
 
-main > div > img {
+main.cart > div {
+  grid-template-areas: "img name price dropdown" "img ingredients ingredients dropdown" "img customize customize dropdown" "toggles toggles toggles toggles";
+}
+
+main > div > img:not(.dropdown) {
   grid-area: img;
 }
 
@@ -32,4 +44,12 @@ main > div > .customize {
 
 main > div > .buy {
   grid-area: buy;
+}
+
+main > div > .dropdown {
+  grid-area: dropdown;
+}
+
+main > div > .toggles {
+  grid-area: toggles;
 }

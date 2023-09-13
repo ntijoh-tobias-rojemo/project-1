@@ -3,7 +3,7 @@
 <header>
   <img src="img/logo.svg" />
 </header>
-<main>
+<main class="index">
   <%= for pizza <- pizzas do %>
     <div data-id=<%= pizza.id %> data-ingredients=<%= pizza.ingredients %> data-name=<%= pizza.name %> data-price=<%= pizza.price %>>
       <img src="img/<%= pizza.id %>.svg" />
