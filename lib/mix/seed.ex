@@ -129,17 +129,23 @@ defmodule Mix.Tasks.Seed do
       pool: DBConnection.ConnectionPool
     )
 
+    ingredient_ids = get_ingredient_ids()
+
     Postgrex.query!(
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
-      [parse_to_bitfield(["Tomatsås", "Mozzarella", "Basilika"]), "Margherita", 10999],
+      [
+        parse_to_bitfield(ingredient_ids, ["Tomatsås", "Mozzarella", "Basilika"]),
+        "Margherita",
+        10999
+      ],
       pool: DBConnection.ConnectionPool
     )
 
     Postgrex.query!(
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
-      [parse_to_bitfield(["Tomatsås"]), "Marinara", 10999],
+      [parse_to_bitfield(ingredient_ids, ["Tomatsås"]), "Marinara", 10999],
       pool: DBConnection.ConnectionPool
     )
 
@@ -147,7 +153,7 @@ defmodule Mix.Tasks.Seed do
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
       [
-        parse_to_bitfield(["Tomatsås", "Mozzarella", "Skinka", "Svamp"]),
+        parse_to_bitfield(ingredient_ids, ["Tomatsås", "Mozzarella", "Skinka", "Svamp"]),
         "Prosciutto e funghi",
         12999
       ],
@@ -158,7 +164,14 @@ defmodule Mix.Tasks.Seed do
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
       [
-        parse_to_bitfield(["Tomatsås", "Mozzarella", "Skinka", "Svamp", "Kronärtskocka", "Oliver"]),
+        parse_to_bitfield(ingredient_ids, [
+          "Tomatsås",
+          "Mozzarella",
+          "Skinka",
+          "Svamp",
+          "Kronärtskocka",
+          "Oliver"
+        ]),
         "Quattro stagioni",
         13999
       ],
@@ -169,7 +182,13 @@ defmodule Mix.Tasks.Seed do
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
       [
-        parse_to_bitfield(["Tomatsås", "Mozzarella", "Skinka", "Svamp", "Kronärtskocka"]),
+        parse_to_bitfield(ingredient_ids, [
+          "Tomatsås",
+          "Mozzarella",
+          "Skinka",
+          "Svamp",
+          "Kronärtskocka"
+        ]),
         "Capricciosa",
         12999
       ],
@@ -180,7 +199,13 @@ defmodule Mix.Tasks.Seed do
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
       [
-        parse_to_bitfield(["Tomatsås", "Mozzarella", "Parmesan", "Pecorino", "Gorgonzola"]),
+        parse_to_bitfield(ingredient_ids, [
+          "Tomatsås",
+          "Mozzarella",
+          "Parmesan",
+          "Pecorino",
+          "Gorgonzola"
+        ]),
         "Quattro formaggi",
         15999
       ],
@@ -191,7 +216,13 @@ defmodule Mix.Tasks.Seed do
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
       [
-        parse_to_bitfield(["Tomatsås", "Mozzarella", "Paprika", "Aubergine", "Zucchini"]),
+        parse_to_bitfield(ingredient_ids, [
+          "Tomatsås",
+          "Mozzarella",
+          "Paprika",
+          "Aubergine",
+          "Zucchini"
+        ]),
         "Ortolana",
         11999
       ],
@@ -202,7 +233,7 @@ defmodule Mix.Tasks.Seed do
       DB,
       "INSERT INTO pizzas(ingredients, name, price) VALUES($1, $2, $3)",
       [
-        parse_to_bitfield(["Tomatsås", "Mozzarella", "Salami", "Paprika", "Chili"]),
+        parse_to_bitfield(ingredient_ids, ["Tomatsås", "Mozzarella", "Salami", "Paprika", "Chili"]),
         "Diavola",
         14999
       ],
@@ -217,9 +248,9 @@ defmodule Mix.Tasks.Seed do
     ingredient_ids |> Enum.reduce(%{}, fn [id, name], acc -> acc |> Map.put(name, id) end)
   end
 
-  defp parse_to_bitfield(ingredients) do
+  defp parse_to_bitfield(ingredient_ids, ingredients) do
     Enum.reduce(ingredients, 0, fn x, acc ->
-      acc ||| 1 <<< Map.get(get_ingredient_ids(), x)
+      acc ||| 1 <<< Map.get(ingredient_ids, x)
     end)
   end
 end
