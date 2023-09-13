@@ -5,7 +5,7 @@
 </header>
 <main>
   <%= for pizza <- pizzas do %>
-    <div>
+    <div data-id=<%= pizza.id %> data-ingredients=<%= pizza.ingredients %> data-name=<%= pizza.name %> data-price=<%= pizza.price %>>
       <img src="img/<%= pizza.id %>.svg" />
       <h2><%= pizza.name %></h2>
       <span><%= pizza.price / 100 %>:-</span>
@@ -17,5 +17,5 @@
   </div>
   <% end %>
 </main>
-
+<script src="js/index.js" defer></script>
 
