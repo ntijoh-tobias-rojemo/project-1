@@ -3,7 +3,14 @@ const ingredients = document
   .innerHTML.split("§§")
   .map((ingredient) => {
     const data = ingredient.split("§");
-    return { id: data[0], name: [1], price: [2] };
+    return { id: data[0], name: data[1], price: data[2] };
   });
 
-const order = localStorage.getItem("order") || [];
+const order =
+  localStorage
+    .getItem("order")
+    ?.split("§§")
+    ?.map((pizza) => {
+      const data = pizza.split("§");
+      return { id: data[0], name: data[1], ingredients: data[2], price: data[3] };
+    }) || [];

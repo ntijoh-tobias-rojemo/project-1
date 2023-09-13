@@ -5,4 +5,5 @@
 <main> 
 
 </main>
+<span id="data" hidden><%= ingredients |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.price}" end) |> Enum.join("§§") %>></span>
 <script src = "/js/cart.js" defer> </script>
