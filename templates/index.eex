@@ -1,13 +1,14 @@
 <h1>Welcome</h1>
+<img src="img/logo.svg" />
 
 <main>
   <%= for pizza <- pizzas do %>
     <div>
         <img src="img/<%= pizza.id %>.svg" />
         <h2><%= pizza.name %></h2>
-        <span><%= pizza.price %></span>
+        <span><%= pizza.price / 100 %>:-</span>
         <ul>
-            <%= Enum.map(Enum.filter(ingredients, fn ingredient -> Bitwise.band(pizza.ingredients, Bitwise.bsl(1, ingredient.id)) > 0 end), fn ingredient -> "<li>#{ingredient.name}</li>" end) %>
+            <%= ingredients |> Enum.filter(fn ingredient -> Bitwise.band(pizza.ingredients, Bitwise.bsl(1, ingredient.id)) > 0 end) |> Enum.map(fn ingredient -> "<li>#{ingredient.name}</li>" end) %>
         </ul>
         <button>Customize</button>
         <button>Add to cart</button>
