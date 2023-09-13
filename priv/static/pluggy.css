@@ -1,11 +1,41 @@
-body {
-	background-color: peachpuff;
+main {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 25% 25% 25% 25%;
 }
 
-#pizza-flex{
-
+main > div {
+  grid-area: 1 1;
+  display: grid;
+  grid-template-areas: "img name price" "img ingredients ingredients" "img customize buy";
 }
 
-#oo{
+main > div > img {
+  grid-area: img;
+}
 
+main > div > h2 {
+  grid-area: name;
+}
+
+main > div > span {
+  grid-area: price;
+}
+
+main > div > ul {
+  grid-area: ingredients;
+}
+
+main > div > .customize {
+  grid-area: customize;
+}
+
+main > div > .buy {
+  grid-area: buy;
+}
+
+#pizza-flex {
+}
+
+#oo {
 }

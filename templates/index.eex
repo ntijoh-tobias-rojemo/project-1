@@ -1,4 +1,3 @@
-<h1>Welcome</h1>
 <img src="img/logo.svg" />
 
 <main>
@@ -10,8 +9,8 @@
         <ul>
             <%= ingredients |> Enum.filter(fn ingredient -> Bitwise.band(pizza.ingredients, Bitwise.bsl(1, ingredient.id)) > 0 end) |> Enum.map(fn ingredient -> "<li>#{ingredient.name}</li>" end) %>
         </ul>
-        <button>Customize</button>
-        <button>Add to cart</button>
+        <button class="customize">Customize</button>
+        <button class="buy">Add to cart</button>
     </div>
   <% end %>
 </main>
