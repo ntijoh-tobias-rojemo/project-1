@@ -1,5 +1,14 @@
+h1,
+h2,
+p,
+span,
+li {
+  font-family: sans-serif;
+}
+
 main.index {
   display: grid;
+  grid-auto-flow: column;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
@@ -12,45 +21,46 @@ main.cart {
 main > div {
   grid-area: auto;
   display: grid;
-
-  background-color: #ffecc4;
-  border: 2px solid #006f45;
-  border-radius: 5px;
-  padding: 2.5%;
-  margin: 2.5%;
 }
 
 main.index > div {
-  grid-template-areas: "img name price" "img ingredients ingredients" "img customize buy";
-  grid-template-columns: 40% 0.5fr 0.5fr;
-  column-gap: 0.5%;
+  display: flex;
+  flex-direction: row;
 }
 
 main.cart > div {
-  grid-template-areas: "img name price" "img ingredients toggles" "remove options toggles";
-  grid-template-columns: 40% 1fr 1fr;
-  grid-template-rows: 15% 1fr 10%;
+  display: flex;
+  flex: row;
 }
 
 main.confirm > div {
   grid-template-areas: "img name price" "img ingredients ingredients";
 }
 
-main > div > img:not(.dropdown) {
-  grid-area: img;
+main > div > img {
+  flex: 1;
+  width: 20%;
 }
 
-main > div > h2 {
+main .info {
+  flex: 1;
+}
+
+main .info > h2 {
   grid-area: name;
 }
 
-main > div > span {
+main .info > span {
   grid-area: price;
   text-align: right;
 }
 
-main > div > ul {
+main .ingredients {
   grid-area: ingredients;
+}
+
+main .ingredients > p {
+  color: #00000050;
 }
 
 button {
@@ -58,19 +68,23 @@ button {
   border-radius: 10px;
   border: 0;
   cursor: pointer;
+  margin: 5px;
+  padding: 5px;
 }
 
 main.index button:active {
   box-shadow: inset 3px 3px;
 }
 
+main.index .buttons {
+  grid-area: buttons;  
+}
+
 .customize {
-  grid-area: customize;
-  background-color: #006f45;
+  background-color: #ffecc4;
 }
 
 .buy {
-  grid-area: buy;
   background-color: lightgreen;
 }
 
@@ -82,16 +96,6 @@ main.index button:active {
 .options {
   grid-area: options;
   height: min-content;
-}
-
-.dropdown {
-  grid-area: dropdown;
-  transform: rotate(270deg);
-  transition: transform 1s;
-}
-
-.opened {
-  transform: rotate(180deg);
 }
 
 .toggles {
@@ -129,12 +133,6 @@ header > .basket {
   flex: 1;
 }
 
-
-@keyframes shake{
-  0% { transform: skewY(-15deg); }
-  5% { transform: skewY(15deg); }
-  10% { transform: skewY(-15deg); }
-  15% { transform: skewY(15deg); }
-  20% { transform: skewY(0deg); }
-  100% { transform: skewY(0deg); }
- }
+li {
+  list-style-type: none;
+}

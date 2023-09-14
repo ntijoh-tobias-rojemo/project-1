@@ -51,7 +51,8 @@ order.forEach((pizza, i) => {
   const span = document.createElement("span");
   span.innerHTML = `${calcPrice(pizza)}:-`;
 
-  const ul = document.createElement("ul");
+  const ingredientList = document.createElement("div");
+  ingredientList.classList.add("ingredients");
 
   ingredients
     .filter(
@@ -59,31 +60,16 @@ order.forEach((pizza, i) => {
         (pizzas[pizza.id - 1].ingredients & (1 << ingredient.id)) > 0
     )
     .forEach((ingredient) => {
-      const li = document.createElement("li");
-      li.innerHTML = ingredient.name;
-      ul.appendChild(li);
+      const p = document.createElement("p");
+      p.innerHTML = ingredient.name;
+      ingredientList.appendChild(p);
     });
 
   const options = document.createElement("div");
   options.classList.add("options");
-  ingredients.slice(0, 2).forEach((ingredient) => {
+  ingredients.forEach((ingredient) => {
     appendBox(
       options,
-      i,
-      ingredient,
-      pizza.ingredients & (1 << ingredient.id),
-      true,
-      pizza,
-      span
-    );
-  });
-
-  const toggles = document.createElement("div");
-  toggles.classList.add("toggles");
-
-  ingredients.slice(2).forEach((ingredient) => {
-    appendBox(
-      toggles,
       i,
       ingredient,
       pizza.ingredients & (1 << ingredient.id),
@@ -95,7 +81,7 @@ order.forEach((pizza, i) => {
 
   const remove = document.createElement("button");
   remove.classList.add("remove");
-  remove.innerHTML = "Remove";
+  remove.innerHTML = "Ta bort";
   remove.addEventListener("click", () => {
     order.splice(i, 1);
     if (order.length == 0) localStorage.removeItem("order");
@@ -109,13 +95,17 @@ order.forEach((pizza, i) => {
     location.reload();
   });
 
+  const info = document.createElement("div");
+  info.classList.add("info");
+
+  info.appendChild(h);
+  info.appendChild(span);
+  info.appendChild(ingredientList);
+  info.appendChild(options);
+  info.appendChild(remove);
+
   elem.appendChild(img);
-  elem.appendChild(h);
-  elem.appendChild(span);
-  elem.appendChild(ul);
-  elem.appendChild(options);
-  elem.appendChild(toggles);
-  elem.appendChild(remove);
+  elem.appendChild(info);
 
   main.appendChild(elem);
 });

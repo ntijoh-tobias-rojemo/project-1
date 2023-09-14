@@ -4,13 +4,16 @@
   <%= for pizza <- pizzas do %>
     <div data-id="<%= pizza.id %>" data-ingredients="<%= pizza.ingredients %>" data-name="<%= pizza.name %>" data-price="<%= pizza.price %>">
       <img src="img/<%= pizza.id %>.svg" />
-      <h2><%= pizza.name %></h2>
-      <span><%= pizza.price / 100 %>:-</span>
-      <ul>
-        <%= ingredients |> Enum.filter(fn ingredient -> (pizza.ingredients &&& 1 <<< ingredient.id) > 0 end) |> Enum.map(fn ingredient -> "<li>#{ingredient.name}</li>" end) %>
-      </ul>
-      <button class="customize">Customize</button>
-      <button class="buy">Add to cart</button>
+      <div class="info">
+        <h2><%= pizza.name %></h2>
+        <div class="ingredients">
+          <%= ingredients |> Enum.filter(fn ingredient -> (pizza.ingredients &&& 1 <<< ingredient.id) > 0 end) |> Enum.map(fn ingredient -> "<p>#{ingredient.name}</p>" end) %>
+        </div>
+        <div class="buttons">
+          <button class="customize">Anpassa</button>
+          <button class="buy">Köp</button>
+        </div>
+      </div>
   </div>
   <% end %>
 </main>
