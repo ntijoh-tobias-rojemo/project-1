@@ -128,3 +128,13 @@ header > .basket {
 .basket > img {
   flex: 1;
 }
+
+
+@keyframes shake{
+  0% { transform: skewY(-15deg); }
+  5% { transform: skewY(15deg); }
+  10% { transform: skewY(-15deg); }
+  15% { transform: skewY(15deg); }
+  20% { transform: skewY(0deg); }
+  100% { transform: skewY(0deg); }
+ }
