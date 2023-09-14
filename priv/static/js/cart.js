@@ -44,10 +44,11 @@ order.forEach((pizza, i) => {
       ul.appendChild(li);
     });
 
-  const customize = document.createElement("div");
+  const options = document.createElement("div");
+  options.classList.add("options");
   ingredients.slice(-2).forEach((ingredient) => {
     appendBox(
-      customize,
+      options,
       i,
       ingredient,
       pizza.ingredients & (1 << ingredient.id)
@@ -69,7 +70,7 @@ order.forEach((pizza, i) => {
   elem.appendChild(h);
   elem.appendChild(span);
   elem.appendChild(ul);
-  elem.appendChild(customize);
+  elem.appendChild(options);
   elem.appendChild(dropdown);
   elem.appendChild(toggles);
 

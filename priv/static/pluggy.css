@@ -1,7 +1,7 @@
 main.index {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 }
 
 main.cart {
@@ -10,8 +10,14 @@ main.cart {
 }
 
 main > div {
-  grid-area: 1 1;
+  grid-area: auto;
   display: grid;
+
+  background-color: #ffecc4;
+  border: 2px solid #006f45;
+  border-radius: 5px;
+  padding: 2.5%;
+  margin: 2.5%;
 }
 
 main.index > div {
@@ -19,7 +25,12 @@ main.index > div {
 }
 
 main.cart > div {
-  grid-template-areas: "img name price dropdown" "img ingredients ingredients dropdown" "img customize customize dropdown" "toggles toggles toggles toggles";
+  grid-template-areas: "img name price dropdown" "img ingredients toggles toggles" "img options toggles toggles";
+  grid-template-columns: 40% 0.5fr 0.5fr 5%;
+}
+
+main.confirm > div {
+  grid-template-areas: "img name price" "img ingredients ingredients";
 }
 
 main > div > img:not(.dropdown) {
@@ -38,18 +49,37 @@ main > div > ul {
   grid-area: ingredients;
 }
 
-main > div > .customize {
+.customize {
   grid-area: customize;
 }
 
-main > div > .buy {
+.options {
+  grid-area: options;
+  height: min-content;
+}
+
+.buy {
   grid-area: buy;
 }
 
-main > div > .dropdown {
+.dropdown {
   grid-area: dropdown;
+  transform: rotate(270deg);
+  transition: transform 1s;
 }
 
-main > div > .toggles {
+.opened {
+  transform: rotate(180deg);
+}
+
+.toggles {
   grid-area: toggles;
+  height: min-content;
+}
+
+.toggles,
+.options {
+  display: grid;
+  grid-template-columns: min-content min-content;
+  align-items: center;
 }
