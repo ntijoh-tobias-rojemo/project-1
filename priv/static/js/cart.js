@@ -45,8 +45,17 @@ order.forEach((pizza, i) => {
   h.innerHTML = pizza.name;
 
   const span = document.createElement("span");
-  span.innerHTML = (pizza.price + ingredients.filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0).filter((ingreditent) => (pizzas[pizza.id - 1].ingredients & (1 << ingreditent.id)) == 0).map(x => x.price).reduce((a, b) => a + b, 0)
-  ) / 100;
+  span.innerHTML =
+    (pizza.price +
+      ingredients
+        .filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0)
+        .filter(
+          (ingreditent) =>
+            (pizzas[pizza.id - 1].ingredients & (1 << ingreditent.id)) == 0
+        )
+        .map((x) => x.price)
+        .reduce((a, b) => a + b, 0)) /
+    100;
 
   const ul = document.createElement("ul");
 
@@ -94,8 +103,6 @@ function appendBox(list, pizza, ingredient, enabled) {
   const label = document.createElement("label");
   label.for = `${pizza}-${ingredient.id}`;
   label.innerHTML = `${ingredient.name} ${ingredient.price / 100}`;
-
-
 
   box.addEventListener("click", () => {
     order[pizza].ingredients ^= 1 << ingredient.id;
