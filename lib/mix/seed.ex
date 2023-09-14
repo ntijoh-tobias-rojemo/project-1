@@ -60,6 +60,9 @@ defmodule Mix.Tasks.Seed do
   defp seed_data() do
     IO.puts("Seeding data")
 
+    insert_ingredient("Familjepizza", 0)
+    insert_ingredient("Glutenfri", 0)
+
     insert_ingredient("Skinka", 999)
     insert_ingredient("Oliver", 1999)
     insert_ingredient("Tomatsås", 499)
@@ -75,8 +78,6 @@ defmodule Mix.Tasks.Seed do
     insert_ingredient("Zucchini", 999)
     insert_ingredient("Salami", 1999)
     insert_ingredient("Chili", 999)
-    insert_ingredient("Familjepizza", 0)
-    insert_ingredient("Glutenfri", 0)
 
     ingredient_ids = get_ingredient_ids()
 

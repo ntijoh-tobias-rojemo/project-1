@@ -69,7 +69,7 @@ order.forEach((pizza, i) => {
 
   const options = document.createElement("div");
   options.classList.add("options");
-  ingredients.slice(-2).forEach((ingredient) => {
+  ingredients.slice(0, 2).forEach((ingredient) => {
     appendBox(options, i, ingredient, pizza.ingredients & (1 << ingredient.id));
   });
 
@@ -80,7 +80,7 @@ order.forEach((pizza, i) => {
   const toggles = document.createElement("div");
   toggles.classList.add("toggles");
 
-  ingredients.slice(0, -2).forEach((ingredient) => {
+  ingredients.slice(2).forEach((ingredient) => {
     appendBox(toggles, i, ingredient, pizza.ingredients & (1 << ingredient.id));
   });
 
