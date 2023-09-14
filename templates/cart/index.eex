@@ -1,6 +1,3 @@
-<header> 
-    <img src="img/logo.svg" />
-</header>
 <main class="cart"></main>
 <span id="data" hidden><%= ingredients |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.price}" end) |> Enum.join("§§") %>></span>
 <script src = "/js/cart.js" defer></script>

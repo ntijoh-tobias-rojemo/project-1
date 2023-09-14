@@ -6,6 +6,9 @@
 	<link rel="stylesheet" type="text/css" href="/pluggy.css">
 </head>
 <body>
+	<header>
+  		<img src="img/logo.svg" />
+	</header>
 	<%= template %>
 </body>
 </html>

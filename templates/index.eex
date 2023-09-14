@@ -1,8 +1,5 @@
 <% import Bitwise %>
 
-<header>
-  <img src="img/logo.svg" />
-</header>
 <main class="index">
   <%= for pizza <- pizzas do %>
     <div data-id=<%= pizza.id %> data-ingredients=<%= pizza.ingredients %> data-name=<%= pizza.name %> data-price=<%= pizza.price %>>
