@@ -27,8 +27,9 @@ main.index > div {
 }
 
 main.cart > div {
-  grid-template-areas: "img name price" "img ingredients toggles" "img options toggles";
+  grid-template-areas: "img name price" "img ingredients toggles" "remove options toggles";
   grid-template-columns: 40% 1fr 1fr;
+  grid-template-rows: 15% 1fr 10%;
 }
 
 main.confirm > div {
@@ -52,7 +53,7 @@ main > div > ul {
   grid-area: ingredients;
 }
 
-main.index button {
+button {
   height: 2rem;
   border-radius: 10px;
   border: 0;
@@ -71,6 +72,11 @@ main.index button:active {
 .buy {
   grid-area: buy;
   background-color: lightgreen;
+}
+
+.remove {
+  grid-area: remove;
+  background-color: red;
 }
 
 .options {

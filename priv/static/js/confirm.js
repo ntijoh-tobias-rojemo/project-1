@@ -33,6 +33,9 @@ const order =
       };
     }) || [];
 
+const familyBit =
+  1 << ingredients.find((ingredient) => ingredient.name == "Familjepizza").id;
+
 const main = document.querySelector("main");
 
 order.forEach((pizza, i) => {
@@ -45,7 +48,7 @@ order.forEach((pizza, i) => {
   h.innerHTML = pizza.name;
 
   const span = document.createElement("span");
-  span.innerHTML = pizza.price / 100;
+  span.innerHTML = `${calcPrice(pizza)}:-`;
 
   const ul = document.createElement("ul");
   ingredients
@@ -66,4 +69,20 @@ function appendEntry(list, pizza, ingredient) {
   const li = document.createElement("li");
   li.innerHTML = ingredient.name;
   list.appendChild(li);
+}
+
+function calcPrice(pizza) {
+  return (
+    ((pizza.price +
+      ingredients
+        .filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0)
+        .filter(
+          (ingreditent) =>
+            (pizzas[pizza.id - 1].ingredients & (1 << ingreditent.id)) == 0
+        )
+        .map((x) => x.price)
+        .reduce((a, b) => a + b, 0)) /
+      100) *
+    ((pizza.ingredients & familyBit) > 0 ? 2 : 1)
+  );
 }

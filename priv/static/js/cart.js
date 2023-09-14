@@ -93,12 +93,29 @@ order.forEach((pizza, i) => {
     );
   });
 
+  const remove = document.createElement("button");
+  remove.classList.add("remove");
+  remove.innerHTML = "Remove";
+  remove.addEventListener("click", () => {
+    order.splice(i, 1);
+    if (order.length == 0) localStorage.removeItem("order");
+    else
+      localStorage.setItem(
+        "order",
+        order
+          .map((x) => `${x.id}§${x.name}§${x.ingredients}§${x.price}`)
+          .join("§§")
+      );
+    location.reload();
+  });
+
   elem.appendChild(img);
   elem.appendChild(h);
   elem.appendChild(span);
   elem.appendChild(ul);
   elem.appendChild(options);
   elem.appendChild(toggles);
+  elem.appendChild(remove);
 
   main.appendChild(elem);
 });
