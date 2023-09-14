@@ -28,6 +28,7 @@ defmodule Pluggy.Router do
 
   get("/", do: PizzaController.index(conn))
   get("/cart", do: CartController.index(conn))
+  get("/confirm", do: CartController.confirm(conn))
 
   get("/fruits", do: FruitController.index(conn))
   get("/fruits/new", do: FruitController.new(conn))

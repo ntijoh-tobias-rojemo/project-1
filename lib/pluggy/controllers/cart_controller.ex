@@ -7,7 +7,11 @@ defmodule Pluggy.CartController do
   import Plug.Conn, only: [send_resp: 3]
 
   def index(conn) do
-    send_resp(conn, 200, render("cart", ingredients: Ingredient.all()))
+    send_resp(conn, 200, render("cart/index", ingredients: Ingredient.all()))
+  end
+
+  def confirm(conn) do
+    send_resp(conn, 200, render("cart/confirm", ingredients: Ingredient.all()))
   end
 
   # render använder eex

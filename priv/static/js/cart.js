@@ -32,7 +32,7 @@ order.forEach((pizza, i) => {
   h.innerHTML = pizza.name;
 
   const span = document.createElement("span");
-  span.innerHTML = pizza.price;
+  span.innerHTML = pizza.price / 100;
 
   const ul = document.createElement("ul");
 
