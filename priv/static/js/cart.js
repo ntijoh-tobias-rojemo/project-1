@@ -48,19 +48,7 @@ order.forEach((pizza, i) => {
   h.innerHTML = pizza.name;
 
   const span = document.createElement("span");
-  span.innerHTML = `${
-    ((pizza.price +
-      ingredients
-        .filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0)
-        .filter(
-          (ingreditent) =>
-            (pizzas[pizza.id - 1].ingredients & (1 << ingreditent.id)) == 0
-        )
-        .map((x) => x.price)
-        .reduce((a, b) => a + b, 0)) /
-      100) *
-    ((pizza.ingredients & familyBit) > 0 ? 2 : 1)
-  }:-`;
+  span.innerHTML = `${calcPrice(pizza)}:-`;
 
   const ul = document.createElement("ul");
 
@@ -78,7 +66,15 @@ order.forEach((pizza, i) => {
   const options = document.createElement("div");
   options.classList.add("options");
   ingredients.slice(0, 2).forEach((ingredient) => {
-    appendBox(options, i, ingredient, pizza.ingredients & (1 << ingredient.id));
+    appendBox(
+      options,
+      i,
+      ingredient,
+      pizza.ingredients & (1 << ingredient.id),
+      true,
+      pizza,
+      span
+    );
   });
 
   const dropdown = document.createElement("img");
@@ -94,7 +90,9 @@ order.forEach((pizza, i) => {
       i,
       ingredient,
       pizza.ingredients & (1 << ingredient.id),
-      (pizzas[pizza.id - 1].ingredients & (1 << ingredient.id)) == 0
+      (pizzas[pizza.id - 1].ingredients & (1 << ingredient.id)) == 0,
+      pizza,
+      span
     );
   });
 
@@ -109,13 +107,13 @@ order.forEach((pizza, i) => {
   main.appendChild(elem);
 });
 
-function appendBox(list, pizza, ingredient, enabled, showPrice = true) {
+function appendBox(list, i, ingredient, enabled, showPrice, pizza, priceElem) {
   const box = document.createElement("input");
   box.type = "checkbox";
-  box.id = `${pizza}-${ingredient.id}`;
+  box.id = `${i}-${ingredient.id}`;
   box.checked = enabled;
   const label = document.createElement("label");
-  label.for = `${pizza}-${ingredient.id}`;
+  label.for = `${i}-${ingredient.id}`;
   if (ingredient.name == "Familjepizza") {
     label.innerHTML = `${ingredient.name} - x2`;
   } else if (ingredient.price == 0 || !showPrice) {
@@ -125,15 +123,32 @@ function appendBox(list, pizza, ingredient, enabled, showPrice = true) {
   }
 
   box.addEventListener("click", () => {
-    order[pizza].ingredients ^= 1 << ingredient.id;
+    order[i].ingredients ^= 1 << ingredient.id;
     localStorage.setItem(
       "order",
       order
         .map((x) => `${x.id}§${x.name}§${x.ingredients}§${x.price}`)
         .join("§§")
     );
+    priceElem.innerHTML = `${calcPrice(pizza)}:-`;
   });
 
   list.appendChild(box);
   list.appendChild(label);
+}
+
+function calcPrice(pizza) {
+  return (
+    ((pizza.price +
+      ingredients
+        .filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0)
+        .filter(
+          (ingreditent) =>
+            (pizzas[pizza.id - 1].ingredients & (1 << ingreditent.id)) == 0
+        )
+        .map((x) => x.price)
+        .reduce((a, b) => a + b, 0)) /
+      100) *
+    ((pizza.ingredients & familyBit) > 0 ? 2 : 1)
+  );
 }
