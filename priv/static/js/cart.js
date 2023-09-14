@@ -95,6 +95,14 @@ order.forEach((pizza, i) => {
     location.reload();
   });
 
+  const remove_all = document.createElement("button");
+  remove_all.classList.add("clear");
+  remove_all.innerHTML = "Clear Order";
+  remove_all.addEventListener("click", () => {
+  localStorage.clear("order");
+    location.reload();
+  });
+
   const info = document.createElement("div");
   info.classList.add("info");
 
@@ -103,10 +111,10 @@ order.forEach((pizza, i) => {
   info.appendChild(ingredientList);
   info.appendChild(options);
   info.appendChild(remove);
+  info.appendChild(remove_all)
 
   elem.appendChild(img);
   elem.appendChild(info);
-
   main.appendChild(elem);
 });
 
