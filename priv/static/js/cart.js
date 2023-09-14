@@ -45,7 +45,7 @@ order.forEach((pizza, i) => {
   h.innerHTML = pizza.name;
 
   const span = document.createElement("span");
-  span.innerHTML = (pizza.price + ingredients.filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0).map(x => x.price).reduce((a, b) => a + b)
+  span.innerHTML = (pizza.price + ingredients.filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0).map(x => x.price).reduce((a, b) => a + b, 0)
   ) / 100;
 
   const ul = document.createElement("ul");
