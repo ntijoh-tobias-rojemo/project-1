@@ -1,3 +1,4 @@
 <main class="confirm"></main>
-<span id="data" hidden><%= ingredients |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.price}" end) |> Enum.join("§§") %>></span>
+<span id="ingredient-data" hidden><%= ingredients |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.price}" end) |> Enum.join("§§") %>></span>
+<span id="pizza-data" hidden><%= pizzas |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.ingredients}§#{x.price}" end) |> Enum.join("§§") %>></span>
 <script src = "/js/confirm.js" defer></script>

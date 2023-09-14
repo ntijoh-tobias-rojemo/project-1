@@ -1,9 +1,22 @@
 const ingredients = document
-  .getElementById("data")
+  .getElementById("ingredient-data")
   .innerHTML.split("§§")
   .map((ingredient) => {
     const data = ingredient.split("§");
     return { id: Number(data[0]), name: data[1], price: Number(data[2]) };
+  });
+
+const pizzas = document
+  .getElementById("pizza-data")
+  .innerHTML.split("§§")
+  .map((ingredient) => {
+    const data = ingredient.split("§");
+    return {
+      id: Number(data[0]),
+      name: data[1],
+      ingredients: Number(data[2]),
+      price: Number(data[3]),
+    };
   });
 
 const order =
@@ -48,12 +61,7 @@ order.forEach((pizza, i) => {
   const options = document.createElement("div");
   options.classList.add("options");
   ingredients.slice(-2).forEach((ingredient) => {
-    appendBox(
-      options,
-      i,
-      ingredient,
-      pizza.ingredients & (1 << ingredient.id)
-    );
+    appendBox(options, i, ingredient, pizza.ingredients & (1 << ingredient.id));
   });
 
   const dropdown = document.createElement("img");
