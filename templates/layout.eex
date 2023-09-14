@@ -7,8 +7,11 @@
 </head>
 <body>
 	<header>
-		<a href="/">	
+		<a class="logo" href="/">	
   			<img src="img/logo.svg" />
+		</a>
+		<a class="basket" href="/cart">
+		<img  src="img/basket.svg" />
 		</a>
 	</header>
 	<%= template %>

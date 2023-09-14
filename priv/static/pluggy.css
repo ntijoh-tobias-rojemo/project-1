@@ -108,3 +108,23 @@ label {
   grid-template-columns: min-content min-content;
   align-items: center;
 }
+
+header {
+  display: flex;
+  flex-direction: row;
+}
+
+header > .logo {
+  flex: 5;
+}
+
+header > .basket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.basket > img {
+  flex: 1;
+}
