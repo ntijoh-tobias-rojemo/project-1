@@ -1,13 +1,14 @@
 document.querySelectorAll("main > div").forEach((pizza) => {
   const data = `${pizza.dataset.id}§${pizza.dataset.name}§${pizza.dataset.ingredients}§${pizza.dataset.price}`;
-  const add = () => {
+  pizza.querySelector(".customize").addEventListener("click", () => {
     const order = localStorage.getItem("order")?.split("§§") || [];
     order.push(data);
     localStorage.setItem("order", order.join("§§"));
-  };
-  pizza.querySelector(".customize").addEventListener("click", () => {
-    add();
-    location.assign("/cart");
+    location.assign(`/cart#${order.length - 1}`);
   });
-  pizza.querySelector(".buy").addEventListener("click", add);
+  pizza.querySelector(".buy").addEventListener("click", () => {
+    const order = localStorage.getItem("order")?.split("§§") || [];
+    order.push(data);
+    localStorage.setItem("order", order.join("§§"));
+  });
 });

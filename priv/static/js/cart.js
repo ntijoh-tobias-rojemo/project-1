@@ -40,6 +40,7 @@ const main = document.querySelector("main");
 
 order.forEach((pizza, i) => {
   const elem = document.createElement("div");
+  elem.id = i;
 
   const img = document.createElement("img");
   img.src = `/img/${pizza.id}.svg`;
@@ -101,6 +102,14 @@ order.forEach((pizza, i) => {
 
   main.appendChild(elem);
 });
+
+const match = location.href.match(/#(\d+)/);
+
+if (match) {
+  setTimeout(() => {
+    document.getElementById(match[1]).scrollIntoView({ behavior: "smooth" });
+  }, 100);
+}
 
 function appendBox(list, i, ingredient, enabled, showPrice, pizza, priceElem) {
   const box = document.createElement("input");
