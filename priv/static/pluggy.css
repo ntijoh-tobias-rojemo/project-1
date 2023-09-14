@@ -28,7 +28,7 @@ main.index > div {
 
 main.cart > div {
   grid-template-areas: "img name price dropdown" "img ingredients toggles toggles" "img options toggles toggles";
-  grid-template-columns: 40% 0.5fr 0.5fr 5%;
+  grid-template-columns: 40% 1fr 1fr 5%;
 }
 
 main.confirm > div {
@@ -90,7 +90,10 @@ main.index button:active {
 
 .toggles {
   grid-area: toggles;
-  height: min-content;
+}
+
+label {
+  white-space: nowrap;
 }
 
 .toggles,

@@ -19,6 +19,9 @@ const pizzas = document
     };
   });
 
+const familyBit =
+  1 << ingredients.find((ingredient) => ingredient.name == "Familjepizza").id;
+
 const order =
   localStorage
     .getItem("order")
@@ -45,8 +48,8 @@ order.forEach((pizza, i) => {
   h.innerHTML = pizza.name;
 
   const span = document.createElement("span");
-  span.innerHTML =
-    (pizza.price +
+  span.innerHTML = `${
+    ((pizza.price +
       ingredients
         .filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0)
         .filter(
@@ -55,12 +58,17 @@ order.forEach((pizza, i) => {
         )
         .map((x) => x.price)
         .reduce((a, b) => a + b, 0)) /
-    100;
+      100) *
+    ((pizza.ingredients & familyBit) > 0 ? 2 : 1)
+  }:-`;
 
   const ul = document.createElement("ul");
 
   ingredients
-    .filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0)
+    .filter(
+      (ingredient) =>
+        (pizzas[pizza.id - 1].ingredients & (1 << ingredient.id)) > 0
+    )
     .forEach((ingredient) => {
       const li = document.createElement("li");
       li.innerHTML = ingredient.name;
@@ -81,7 +89,13 @@ order.forEach((pizza, i) => {
   toggles.classList.add("toggles");
 
   ingredients.slice(2).forEach((ingredient) => {
-    appendBox(toggles, i, ingredient, pizza.ingredients & (1 << ingredient.id));
+    appendBox(
+      toggles,
+      i,
+      ingredient,
+      pizza.ingredients & (1 << ingredient.id),
+      (pizzas[pizza.id - 1].ingredients & (1 << ingredient.id)) == 0
+    );
   });
 
   elem.appendChild(img);
@@ -95,14 +109,20 @@ order.forEach((pizza, i) => {
   main.appendChild(elem);
 });
 
-function appendBox(list, pizza, ingredient, enabled) {
+function appendBox(list, pizza, ingredient, enabled, showPrice = true) {
   const box = document.createElement("input");
   box.type = "checkbox";
   box.id = `${pizza}-${ingredient.id}`;
   box.checked = enabled;
   const label = document.createElement("label");
   label.for = `${pizza}-${ingredient.id}`;
-  label.innerHTML = `${ingredient.name} ${ingredient.price / 100}`;
+  if (ingredient.name == "Familjepizza") {
+    label.innerHTML = `${ingredient.name} - x2`;
+  } else if (ingredient.price == 0 || !showPrice) {
+    label.innerHTML = `${ingredient.name}`;
+  } else {
+    label.innerHTML = `${ingredient.name} - ${ingredient.price / 100}:-`;
+  }
 
   box.addEventListener("click", () => {
     order[pizza].ingredients ^= 1 << ingredient.id;
