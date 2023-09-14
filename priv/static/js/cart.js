@@ -9,8 +9,8 @@ const ingredients = document
 const pizzas = document
   .getElementById("pizza-data")
   .innerHTML.split("§§")
-  .map((ingredient) => {
-    const data = ingredient.split("§");
+  .map((pizza) => {
+    const data = pizza.split("§");
     return {
       id: Number(data[0]),
       name: data[1],
@@ -45,7 +45,7 @@ order.forEach((pizza, i) => {
   h.innerHTML = pizza.name;
 
   const span = document.createElement("span");
-  span.innerHTML = (pizza.price + ingredients.filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0).map(x => x.price).reduce((a, b) => a + b, 0)
+  span.innerHTML = (pizza.price + ingredients.filter((ingredient) => (pizza.ingredients & (1 << ingredient.id)) > 0).filter((ingreditent) => (pizzas[pizza.id - 1].ingredients & (1 << ingreditent.id)) == 0).map(x => x.price).reduce((a, b) => a + b, 0)
   ) / 100;
 
   const ul = document.createElement("ul");
