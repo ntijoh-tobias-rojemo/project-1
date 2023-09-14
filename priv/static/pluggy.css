@@ -27,8 +27,8 @@ main.index > div {
 }
 
 main.cart > div {
-  grid-template-areas: "img name price dropdown" "img ingredients toggles toggles" "img options toggles toggles";
-  grid-template-columns: 40% 1fr 1fr 5%;
+  grid-template-areas: "img name price" "img ingredients toggles" "img options toggles";
+  grid-template-columns: 40% 1fr 1fr;
 }
 
 main.confirm > div {

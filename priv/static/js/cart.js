@@ -77,10 +77,6 @@ order.forEach((pizza, i) => {
     );
   });
 
-  const dropdown = document.createElement("img");
-  dropdown.classList.add("dropdown");
-  dropdown.src = "/img/dropdown.svg";
-
   const toggles = document.createElement("div");
   toggles.classList.add("toggles");
 
@@ -101,7 +97,6 @@ order.forEach((pizza, i) => {
   elem.appendChild(span);
   elem.appendChild(ul);
   elem.appendChild(options);
-  elem.appendChild(dropdown);
   elem.appendChild(toggles);
 
   main.appendChild(elem);
