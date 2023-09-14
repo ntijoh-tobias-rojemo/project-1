@@ -84,6 +84,17 @@ function appendBox(list, pizza, ingredient, enabled) {
   const label = document.createElement("label");
   label.for = `${pizza}-${ingredient.id}`;
   label.innerHTML = ingredient.name;
+
+  box.addEventListener("click", () => {
+    order[pizza].ingredients ^= 1 << ingredient.id;
+    localStorage.setItem(
+      "order",
+      order
+        .map((x) => `${x.id}§${x.name}§${x.ingredients}§${x.price}`)
+        .join("§§")
+    );
+  });
+
   list.appendChild(box);
   list.appendChild(label);
 }
