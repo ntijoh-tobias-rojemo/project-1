@@ -44,7 +44,7 @@ defmodule Mix.Tasks.Seed do
 
     Postgrex.query!(
       DB,
-      "CREATE TABLE orders (id SERIAL PRIMARY KEY, status INTEGER NOT NULL, ordered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, customer VARCHAR(255) NOT NULL, price INTEGER NOT NULL)",
+      "CREATE TABLE orders (id SERIAL PRIMARY KEY, status INTEGER NOT NULL, ordered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)",
       [],
       pool: DBConnection.ConnectionPool
     )
