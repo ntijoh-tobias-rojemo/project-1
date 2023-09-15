@@ -1,6 +1,6 @@
 <main class="cart"></main>
 <span id="ingredient-data" hidden><%= ingredients |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.price}" end) |> Enum.join("§§") %></span>
-<span id="pizza-data" hidden><%= pizzas |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.ingredients}§#{x.price}" end) |> Enum.join("§§") %>></span>
+<span id="pizza-data" hidden><%= pizzas |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.ingredients}§#{x.price}" end) |> Enum.join("§§") %></span>
 
 <div class="center"> 
     <div id="fan">
