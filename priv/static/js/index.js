@@ -1,4 +1,4 @@
-const cart = document.querySelector(".basket > img");
+const cart = document.querySelector(".basket img");
 
 document.querySelectorAll("main > div").forEach((pizza) => {
   const data = `${pizza.dataset.id}§${pizza.dataset.name}§${pizza.dataset.ingredients}§${pizza.dataset.price}`;

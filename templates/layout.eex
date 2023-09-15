@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome to Pluggy</title>
+	<title>Tony's Pizza</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="/pluggy.css">
 </head>
@@ -11,7 +11,9 @@
   			<img src="img/logo.svg" />
 		</a>
 		<a class="basket" href="/cart">
-		<img  src="img/basket.svg" />
+			<div class="basket-wrapper">
+				<img src="img/basket.svg" />
+			</div>
 		</a>
 	</header>
 	<%= template %>

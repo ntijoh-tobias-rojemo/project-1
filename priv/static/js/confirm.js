@@ -50,25 +50,36 @@ order.forEach((pizza, i) => {
   const span = document.createElement("span");
   span.innerHTML = `${calcPrice(pizza)}:-`;
 
-  const ul = document.createElement("ul");
+  const ingredientList = document.createElement("div");
+  ingredientList.classList.add("ingredients");
+
   ingredients
     .filter((x) => pizza.ingredients & (1 << x.id))
     .forEach((ingredient) => {
-      appendEntry(ul, i, ingredient);
+      appendEntry(ingredientList, i, ingredient);
     });
 
+  const info = document.createElement("div");
+  info.classList.add("info");
+
+  info.appendChild(h);
+  info.appendChild(span);
+  info.appendChild(ingredientList);
+
   elem.appendChild(img);
-  elem.appendChild(h);
-  elem.appendChild(span);
-  elem.appendChild(ul);
+  elem.appendChild(info);
 
   main.appendChild(elem);
 });
 
+document.getElementById("total").innerHTML = `Total: ${order
+  .map(calcPrice)
+  .reduce((a, b) => a + b, 0)}:-`;
+
 function appendEntry(list, pizza, ingredient) {
-  const li = document.createElement("li");
-  li.innerHTML = ingredient.name;
-  list.appendChild(li);
+  const p = document.createElement("p");
+  p.innerHTML = ingredient.name;
+  list.appendChild(p);
 }
 
 function calcPrice(pizza) {
