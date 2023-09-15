@@ -104,5 +104,8 @@ document.getElementById("send").addEventListener("click", () => {
   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   req.send(`order=${localStorage.getItem("order")}`);
   localStorage.clear();
+  window.alert(
+    "Beställningen är skickad och bör vara klar inom 15 minuter en kvart"
+  );
   location.assign("/");
 });
