@@ -6,6 +6,15 @@ li {
   font-family: sans-serif;
 }
 
+.confirm-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.confirm {
+  flex: 1;
+}
+
 main.index {
   display: grid;
   grid-auto-flow: column;
@@ -20,21 +29,8 @@ main.cart {
 
 main > div {
   grid-area: auto;
-  display: grid;
-}
-
-main.index > div {
   display: flex;
   flex-direction: row;
-}
-
-main.cart > div {
-  display: flex;
-  flex: row;
-}
-
-main.confirm > div {
-  grid-template-areas: "img name price" "img ingredients ingredients";
 }
 
 main > div > img {
@@ -77,7 +73,7 @@ main.index button:active {
 }
 
 main.index .buttons {
-  grid-area: buttons;  
+  grid-area: buttons;
 }
 
 .customize {
@@ -142,4 +138,8 @@ header > .basket {
 
 li {
   list-style-type: none;
+}
+
+#send {
+  background-color: lightgreen;
 }
