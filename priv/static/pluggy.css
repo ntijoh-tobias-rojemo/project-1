@@ -144,13 +144,27 @@ li {
   background-color: lightgreen;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+
+}
+
+#fan {
+  width: 12rem;
+}
+
 a {
   text-decoration: none;
+  width: 10px;
 }
 
 #review_order_div {
-  text-align: center;
-  width: 15rem;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  width: 12rem;
   height: 1.5rem;
   border-radius: 10px;
   border: 0;
