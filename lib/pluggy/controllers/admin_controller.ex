@@ -7,7 +7,15 @@ defmodule Pluggy.AdminController do
   import Plug.Conn, only: [send_resp: 3]
 
   def index(conn) do
-    send_resp(conn, 200, render("admin/index", ingredients: Ingredient.all(), pizzas: Pizza.all()))
+    if conn.remote_ip == {127, 0, 0, 1} do
+      send_resp(
+        conn,
+        200,
+        render("admin/index", ingredients: Ingredient.all(), pizzas: Pizza.all())
+      )
+    else
+      send_resp(conn, 403, "Access denied")
+    end
   end
 
   # render använder eex
