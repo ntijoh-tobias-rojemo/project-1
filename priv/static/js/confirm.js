@@ -100,7 +100,9 @@ function calcPrice(pizza) {
 
 document.getElementById("send").addEventListener("click", () => {
   const req = new XMLHttpRequest();
-  req.open("POST", `/orders`);
+  req.open("POST", `/orders/new`, true);
+  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   req.send(`order=${localStorage.getItem("order")}`);
   localStorage.clear();
+  location.assign("/");
 });
