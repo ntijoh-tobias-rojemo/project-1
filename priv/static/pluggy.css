@@ -143,3 +143,19 @@ li {
 #send {
   background-color: lightgreen;
 }
+
+a {
+  text-decoration: none;
+}
+
+#review_order_div {
+  text-align: center;
+  width: 15rem;
+  height: 1.5rem;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  background-color: lightgreen;
+}
