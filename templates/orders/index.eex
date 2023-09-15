@@ -1,0 +1,20 @@
+<% import Bitwise %>
+
+<span id="ingredient-data" hidden><%= ingredients |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.price}" end) |> Enum.join("§§") %></span>
+<span id="pizza-data" hidden><%= pizzas |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.ingredients}§#{x.price}" end) |> Enum.join("§§") %>></span>
+<main class="orders">
+  <%= for order <- orders do %>
+    <span class="price"></span>
+    <span class="status"></span>
+    <%= for pizza <- order.pizzas do %>
+      <div data-id="<%= pizza.id %>" data-ingredients="<%= pizza.ingredients %>" data-template="<%= pizza.template %>">
+        <h2><%= Enum.find(pizzas, fn x -> x.id == pizza.template end).name %></h2>
+        <img src="/img/<%= pizza.template %>.svg"/>
+        <div class="ingredients">
+        <%= ingredients |> Enum.filter(fn ingredient -> (pizza.ingredients &&& 1 <<< ingredient.id) > 0 end) |> Enum.map(fn ingredient -> "<p>#{ingredient.name}</p>" end) %>
+        </div>
+        <button class="update">Markera som färdig</button>
+      </div>
+    <% end %>
+  <% end %>
+</main>

@@ -14,7 +14,7 @@
           <button class="buy">Köp</button>
         </div>
       </div>
-  </div>
+    </div>
   <% end %>
 </main>
 <script src="/js/index.js" defer></script>
