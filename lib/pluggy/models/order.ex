@@ -6,7 +6,7 @@ defmodule Pluggy.Order do
   def all do
     Postgrex.query!(
       DB,
-      "SELECT orders.id, ordered, status, ordered_pizzas.id, ingredients, template FROM orders INNER JOIN ordered_pizzas ON orders.id = order_id",
+      "SELECT orders.id, ordered, status, ordered_pizzas.id, ingredients, template FROM orders INNER JOIN ordered_pizzas ON orders.id = order_id WHERE NOT status = 2",
       [],
       pool: DBConnection.ConnectionPool
     ).rows

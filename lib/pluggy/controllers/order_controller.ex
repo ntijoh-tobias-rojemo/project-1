@@ -4,7 +4,7 @@ defmodule Pluggy.OrderController do
   alias Pluggy.Order
   alias Pluggy.Ingredient
   alias Pluggy.Pizza
-  import Pluggy.Template, only: [render: 2]
+  import Pluggy.Template, only: [render_no_template: 2]
   import Plug.Conn, only: [send_resp: 3]
 
   def index(conn) do
@@ -12,7 +12,7 @@ defmodule Pluggy.OrderController do
       send_resp(
         conn,
         200,
-        render("orders/index",
+        render_no_template("orders/index",
           ingredients: Ingredient.all(),
           pizzas: Pizza.all(),
           orders: Order.all()

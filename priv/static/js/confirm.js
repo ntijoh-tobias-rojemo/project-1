@@ -74,7 +74,8 @@ order.forEach((pizza, i) => {
 
 document.getElementById("total").innerHTML = `Total: ${order
   .map(calcPrice)
-  .reduce((a, b) => a + b, 0).toFixed(2)}:-`;
+  .reduce((a, b) => a + b, 0)
+  .toFixed(2)}:-`;
 
 function appendEntry(list, pizza, ingredient) {
   const p = document.createElement("p");
