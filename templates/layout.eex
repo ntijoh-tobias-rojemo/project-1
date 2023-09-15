@@ -11,7 +11,9 @@
   			<img src="img/logo.svg" />
 		</a>
 		<a class="basket" href="/cart">
-		<img  src="img/basket.svg" />
+			<div class="basket-wrapper">
+				<img src="img/basket.svg" />
+			</div>
 		</a>
 	</header>
 	<%= template %>
