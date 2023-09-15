@@ -16,7 +16,7 @@ document.querySelectorAll("main > div").forEach((pizza) => {
       [
         { transform: "translate(0, 0) rotate(0deg)" },
         { transform: "translate(5px, -15px) rotate(5deg)" },
-        { transform: "translate(0, 0) rotate(0eg)" },
+        { transform: "translate(0, 0) rotate(0deg)" },
         { transform: "translate(-5px, -15px) rotate(-5deg)" },
         { transform: "translate(0, 0) rotate(0deg)" },
       ],

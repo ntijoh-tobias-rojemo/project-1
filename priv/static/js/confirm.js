@@ -97,3 +97,10 @@ function calcPrice(pizza) {
     ((pizza.ingredients & familyBit) > 0 ? 2 : 1)
   );
 }
+
+document.getElementById("send").addEventListener("click", () => {
+  const req = new XMLHttpRequest();
+  req.open("POST", `/orders`);
+  req.send(`order=${localStorage.getItem("order")}`);
+  localStorage.clear();
+});
