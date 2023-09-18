@@ -180,6 +180,16 @@ a {
   overflow: scroll;
 }
 
+.order form > input {
+  height: 2rem;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  background-color: lightgreen;
+}
+
 .pizza, .order-info {
   flex: 1;
 }
