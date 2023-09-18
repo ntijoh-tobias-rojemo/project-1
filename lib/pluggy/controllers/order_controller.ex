@@ -34,6 +34,14 @@ defmodule Pluggy.OrderController do
     redirect(conn, "/")
   end
 
+  def update(conn, idStr, statusStr) do
+    {id, _} = Integer.parse(idStr)
+    {status, _} = Integer.parse(statusStr)
+    Order.update(id, status)
+
+    redirect(conn, "/orders")
+  end
+
   defp redirect(conn, url) do
     Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
   end

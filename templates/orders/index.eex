@@ -12,12 +12,18 @@
 	<span id="ingredient-data" hidden><%= ingredients |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.price}" end) |> Enum.join("§§") %></span>
   <span id="pizza-data" hidden><%= pizzas |> Enum.map(fn x -> "#{x.id}§#{x.name}§#{x.ingredients}§#{x.price}" end) |> Enum.join("§§") %></span>
   <main class="orders">
-    <%= for order <- orders do %>
+    <%= for order <- orders |> Enum.filter(fn x -> x.status < 2 end) do %>
       <div class="order">
         <div class="order-info">
           <span class="order-id">Order num: <%= order.id %></span><br/>
           <span class="price"></span><br/>
-          <button class="update">Markera som färdig</button>
+          <form class="update" method="post" action="/orders/<%= order.id %>/update/<%= order.status + 1 %>">
+            <%= if order.status == 0 do %>
+              <input type="submit" value="Markera som färdig" />
+            <% else %>
+              <input type="submit" value="Markera som hämtad" />
+            <% end %>
+          </form>
         </div>
         <%= for pizza <- order.pizzas do %>
           <div class="pizza" data-id="<%= pizza.id %>" data-ingredients="<%= pizza.ingredients %>" data-template="<%= pizza.template %>">

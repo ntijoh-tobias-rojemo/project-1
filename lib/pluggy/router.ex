@@ -3,7 +3,6 @@ defmodule Pluggy.Router do
   use Plug.Debugger
 
   alias Pluggy.CartController
-  alias Pluggy.FruitController
   alias Pluggy.PizzaController
   alias Pluggy.OrderController
 
@@ -32,6 +31,7 @@ defmodule Pluggy.Router do
   get("/orders", do: OrderController.index(conn))
 
   post("/orders/new", do: OrderController.add(conn))
+  post("/orders/:id/update/:status", do: OrderController.update(conn, id, status))
 
   match _ do
     send_resp(conn, 404, "oops")

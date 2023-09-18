@@ -43,4 +43,8 @@ defmodule Pluggy.Order do
       )
     end
   end
+
+  def update(id, status) do
+    Postgrex.query!(DB, "UPDATE orders SET status = $1 WHERE id = $2", [status, id])
+  end
 end
