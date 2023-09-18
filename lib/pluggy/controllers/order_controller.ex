@@ -24,14 +24,18 @@ defmodule Pluggy.OrderController do
   end
 
   def add(conn) do
-    order =
-      conn.body_params["order"]
-      |> String.split("§§")
-      |> Enum.map(fn x -> String.split(x, "§") end)
+    if conn.body_params["order"] == "null" do
+      redirect(conn, "/")
+    else
+      order =
+        conn.body_params["order"]
+        |> String.split("§§")
+        |> Enum.map(fn x -> String.split(x, "§") end)
 
-    Order.create(order)
+      Order.create(order)
 
-    redirect(conn, "/")
+      redirect(conn, "/")
+    end
   end
 
   def update(conn, idStr, statusStr) do
