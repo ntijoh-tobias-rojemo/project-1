@@ -29,6 +29,7 @@ defmodule Pluggy.Router do
   get("/cart", do: CartController.index(conn))
   get("/confirm", do: CartController.confirm(conn))
   get("/orders", do: OrderController.index(conn))
+  get("/pizzaimg/:ingredients", do: PizzaController.img(conn, ingredients))
 
   post("/orders/new", do: OrderController.add(conn))
   post("/orders/:id/update/:status", do: OrderController.update(conn, id, status))

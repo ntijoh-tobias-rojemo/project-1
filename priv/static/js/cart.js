@@ -59,7 +59,7 @@ function fillPizza(div, pizza, i) {
   div.textContent = "";
 
   const img = document.createElement("img");
-  img.src = `/img/${pizza.id}.svg`;
+  img.src = `/pizzaimg/${pizza.ingredients}`;
 
   const h = document.createElement("h2");
   h.innerHTML = pizza.name;
@@ -77,21 +77,23 @@ function fillPizza(div, pizza, i) {
       name.innerHTML = ingredient.name;
       ingredientList.appendChild(name);
 
-      const remove = document.createElement("button");
-      remove.innerHTML = "Ta bort";
-      ingredientList.appendChild(remove);
-      remove.addEventListener("click", () => {
-        order[i].ingredients &= ~(1 << ingredient.id);
-        localStorage.setItem(
-          "order",
-          order
-            .map((x) => `${x.id}§${x.name}§${x.ingredients}§${x.price}`)
-            .join("§§")
-        );
-        span.innerHTML = `${calcPrice(pizza)}:-`;
+      if (ingredient.name != "Tomatsås") {
+        const remove = document.createElement("button");
+        remove.innerHTML = "Ta bort";
+        ingredientList.appendChild(remove);
+        remove.addEventListener("click", () => {
+          order[i].ingredients &= ~(1 << ingredient.id);
+          localStorage.setItem(
+            "order",
+            order
+              .map((x) => `${x.id}§${x.name}§${x.ingredients}§${x.price}`)
+              .join("§§")
+          );
+          span.innerHTML = `${calcPrice(pizza)}:-`;
 
-        fillPizza(div, pizza, i);
-      });
+          fillPizza(div, pizza, i);
+        });
+      }
 
       const br = document.createElement("br");
       ingredientList.appendChild(br);
