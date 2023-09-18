@@ -46,18 +46,18 @@ main .info {
   flex: 1;
 }
 
-main .info > h2 {
+/* main .info > h2 {
   grid-area: name;
-}
+} */
 
-main .info > span {
+/* main .info > span {
   grid-area: price;
   text-align: right;
-}
+} */
 
-main .ingredients {
+/* main .ingredients {
   grid-area: ingredients;
-}
+} */
 
 main .ingredients > p {
   color: #00000050;
@@ -73,9 +73,9 @@ button {
   padding: 5px;
 }
 
-main.index button:active {
+/* main.index button:active {
   box-shadow: inset 3px 3px;
-}
+} */
 
 main.index .buttons {
   grid-area: buttons;
@@ -85,14 +85,21 @@ main.index .buttons {
   background-color: rgb(255, 233, 191);
 }
 
-.buy {
-  background-color: rgb(66, 161, 63);
+.buy, 
+#send,
+#review_order_div {
+  background-color: rgb(123, 209, 120);
   width: 50px;
 }
 
 .remove {
   grid-area: remove;
-  background-color: red;
+  background-color: rgb(240, 81, 81);
+}
+
+.clear {
+  width: 110px;
+  background-color: rgb(243, 177, 45);
 }
 
 #review_order_div:hover, 
@@ -105,9 +112,9 @@ button:hover   {
   height: min-content;
 }
 
-.toggles {
+/* .toggles {
   grid-area: toggles;
-}
+} */
 
 label {
   white-space: nowrap;
@@ -152,7 +159,7 @@ li {
 }
 
 #send {
-  background-color: lightgreen;
+  width: fit-content;
 }
 
 .center {
@@ -181,7 +188,6 @@ a {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
-  background-color: lightgreen;
 }
 
 .order {
@@ -211,4 +217,14 @@ a {
 .pizza,
 .order-info {
   flex: 1;
+}
+
+p,
+span {
+  margin: 0.2rem
+}
+
+h2 
+{
+  font-weight: normal;
 }

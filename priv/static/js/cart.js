@@ -145,7 +145,7 @@ function fillPizza(div, pizza, i) {
 
   const removeAll = document.createElement("button");
   removeAll.classList.add("clear");
-  removeAll.innerHTML = "Clear Order";
+  removeAll.innerHTML = "Töm Varukorg";
   removeAll.addEventListener("click", () => {
     localStorage.clear("order");
     location.reload();
