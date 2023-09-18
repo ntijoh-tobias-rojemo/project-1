@@ -46,6 +46,12 @@ main .info {
   flex: 1;
 }
 
+main.cart .info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* main .info > h2 {
   grid-area: name;
 } */
