@@ -60,6 +60,7 @@ function fillPizza(div, pizza, i) {
 
   const img = document.createElement("img");
   img.src = `/pizzaimg/${pizza.ingredients}`;
+  img.style.flex = (pizza.ingredients & familyBit) > 0 ? 2 : 1;
 
   const h = document.createElement("h2");
   h.innerHTML = pizza.name;
