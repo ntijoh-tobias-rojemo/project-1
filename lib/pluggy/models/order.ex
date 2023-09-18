@@ -6,6 +6,28 @@ defmodule Pluggy.Order do
   def all do
     Postgrex.query!(
       DB,
+      "SELECT orders.id, ordered, status, ordered_pizzas.id, ingredients, template FROM orders INNER JOIN ordered_pizzas ON orders.id = order_id",
+      [],
+      pool: DBConnection.ConnectionPool
+    ).rows
+    |> Enum.group_by(fn [x | _] -> x end)
+    |> Map.values()
+    |> Enum.map(fn x ->
+      Enum.reduce(x, %Order{}, fn [id, ordered, status, pizza_id, ingredients, template], acc ->
+        %{
+          acc
+          | id: id,
+            ordered: ordered,
+            status: status,
+            pizzas: [%{id: pizza_id, ingredients: ingredients, template: template} | acc.pizzas]
+        }
+      end)
+    end)
+  end
+
+  def active do
+    Postgrex.query!(
+      DB,
       "SELECT orders.id, ordered, status, ordered_pizzas.id, ingredients, template FROM orders INNER JOIN ordered_pizzas ON orders.id = order_id WHERE NOT status = 2",
       [],
       pool: DBConnection.ConnectionPool

@@ -15,7 +15,7 @@ defmodule Pluggy.OrderController do
         render_no_template("orders/index",
           ingredients: Ingredient.all(),
           pizzas: Pizza.all(),
-          orders: Order.all()
+          orders: Order.active()
         )
       )
     else
