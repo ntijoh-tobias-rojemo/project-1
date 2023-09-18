@@ -19,9 +19,9 @@
           <span class="price"></span><br/>
           <form class="update" method="post" action="/orders/<%= order.id %>/update/<%= order.status + 1 %>">
             <%= if order.status == 0 do %>
-              <input type="submit" value="Markera som färdig" />
+              <input class="finished" type="submit" value="Markera som färdig" />
             <% else %>
-              <input type="submit" value="Markera som hämtad" />
+              <input class="pickedup" type="submit" value="Markera som hämtad" />
             <% end %>
           </form>
         </div>

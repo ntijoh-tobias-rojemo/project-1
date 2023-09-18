@@ -29,13 +29,15 @@ main.cart {
   grid-template-columns: 100%;
 }
 
-main > div, .pizza {
+main > div,
+.pizza {
   grid-area: auto;
   display: flex;
   flex-direction: row;
 }
 
-main > div > img, .pizza img {
+main > div > img,
+.pizza img {
   flex: 1;
   width: 20%;
 }
@@ -196,9 +198,17 @@ a {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
+}
+
+.finished {
+  background-color: #ffecc4;
+}
+
+.pickedup {
   background-color: lightgreen;
 }
 
-.pizza, .order-info {
+.pizza,
+.order-info {
   flex: 1;
 }
